@@ -14,7 +14,7 @@ connection.connect();
 router.post("/register/nickname",function(req,res){
     const { body } = req;
 
-    var nick = body.nick;
+    const nick = body.nick;
 
 
     connection.query("SELECT nick_name from member where nick_name=?",[nick],function(err,result){

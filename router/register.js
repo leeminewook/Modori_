@@ -20,7 +20,6 @@ router.post("/register",function(req,res){
     var pw = body.pw;
     var nick = body.nick;
 
-
     connection.query(`INSERT INTO member(E_mail,password,name,nick_name) VALUES(?, ?, ?, ?)`, [email, pw, name, nick], function(err,result){
         if(err) {
             console.log(err);
