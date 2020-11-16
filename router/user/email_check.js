@@ -20,9 +20,22 @@ router.post("/register/email",function(req,res){
 
 
     connection.query("SELECT E_mail from member where E_mail=?",[email],function(err,result){
-        if(err) console.log(err);
+        if(err) {//추가
+            console.log(err);
+            return res.status(403).json({
+                message:"server error",
+            })
+        }
         console.log(result);
-
+        if(email.length >= 8 && email.length <=40){
+        
+        }
+        else{
+            console.log("길이 범위");
+            return res.status(403).json({//추가
+                message:"이메일 길이가 범위를 벗어났습니다",
+            })
+        }
         if(email.includes('@')){
             console.log("성공");
         }

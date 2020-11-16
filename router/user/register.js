@@ -21,6 +21,13 @@ router.post("/register",function(req,res){
     var nick = body.nick;
 
     connection.query(`INSERT INTO member(E_mail,password,name,nick_name) VALUES(?, ?, ?, ?)`, [email, pw, name, nick], function(err,result){
+        if(pw=="" || name==""){추가
+            console.log("공백 존재");
+            return res.status(403).json({
+                message:"공백이 있습니다",
+            })
+        }
+
         if(err) {
             console.log(err);
             res.status(403).json({

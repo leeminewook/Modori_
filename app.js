@@ -20,13 +20,14 @@ const create_comment = require('./router/comment/create_comment');
 const delete_comment = require('./router/comment/delete_comment');
 const getComment = require('./router/comment/getComment');
 const getComments = require('./router/comment/getComments');
+const ranking = require('./router/ranking');
 
 
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(authmiddleware);
-app.use(login,register,email_check,nickname_check,profile,create,P_delete,image,update,getPost,getPosts,create_comment,delete_comment,getComment,getComments);
+app.use(login,register,email_check,nickname_check,profile,create,P_delete,image,update,getPost,getPosts,create_comment,delete_comment,getComment,getComments,ranking);
 app.use('/static',express.static('public'));
 
 app.listen(8080, () => {

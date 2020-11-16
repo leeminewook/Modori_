@@ -18,8 +18,25 @@ router.post("/register/nickname",function(req,res){
 
 
     connection.query("SELECT nick_name from member where nick_name=?",[nick],function(err,result){
-        if(err) console.log(err);
+        if(err) {//추가
+            console.log(err);
+            return res.status(403).json({
+                message:"server error",
+            })
+        }
         console.log(result);
+        // if(nick.length >= 8 && nick.length<=24){
+        //     res.status(200).json({
+        //         message:"알맞은 길이입니다",
+        //     })
+        // }
+        // else{
+        //     return res.status(403).json({
+        //         message:"범위를 벗어난 닉네임 길이입니다",
+        //     })
+        // }
+
+        
         if(result.length === 0){
             return res.status(200).json({
                 message: "사용할 수 있는 닉네임 입니다.",

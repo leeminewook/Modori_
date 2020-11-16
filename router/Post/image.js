@@ -3,22 +3,14 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2');
 const path = require('path');
-
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1234',
-    database: 'modori'
-});
-
-connection.connect();
+const { v4:uuidv4 } = require('uuid')
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../public'));
+        cb(null, path.join(__dirname, '../../public'));
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname)
+      cb(null, uuidv4()+'.png')
     }
   })
 

@@ -17,6 +17,12 @@ router.post('/login', (req,res) => {
     const { body } = req;
 
     connection.query("select * from member where E_mail=? and password=? ",[body.email,body.pw],function(err,result){
+        if(err){//추가
+            console.log(err);
+            return res.status(403).json({
+                message:"server error",
+            })
+        }
 
         if(result.length != 0){
             for (let i of result) {
@@ -39,7 +45,7 @@ router.post('/login', (req,res) => {
             
         } else{
             return res.status(401).json({
-                message: "N",
+                message: "로그인 실패",
             })
         }
 

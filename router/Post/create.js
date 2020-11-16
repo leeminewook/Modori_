@@ -14,6 +14,7 @@ connection.connect();
 
 router.post("/create",function(req,res){
     const { body, user } = req;
+    console.log(body);
 
     for (let i of user) {
 
@@ -35,8 +36,11 @@ router.post("/create",function(req,res){
         }
         connection.query('INSERT INTO post(Title,Post_Email,Post_Time,Post_Text,Post_nick_name,image_pass) VALUES(?,?,now(),?,?,?)',[title,post_email,post_text,post_nick,image_pass],function(err,result){
         
-            if(err){
+            if(err){//추가
                 console.log(err);  
+                return res.status(403).json({
+                    messgae:"server error",
+                })
             }
             else{
                 console.log(result);

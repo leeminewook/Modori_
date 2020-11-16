@@ -16,6 +16,11 @@ router.get("/:Post_Code",function(req,res){
     const Post_Code = req.params.Post_Code;
     console.log(Post_Code);
     connection.query('SELECT * from post WHERE Post_Code=?',[Post_Code],function(err,result){
+        if(result.length == 0){//추가
+            return res.status(200).json({
+                message:"게시글 없음",
+            })
+        }
         if(err){
             console.log(err);
             return res.status(403).json({

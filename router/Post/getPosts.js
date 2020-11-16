@@ -16,7 +16,12 @@ router.get('/',function(req,res) {
     keyword = req.query.keyword
 
     if(keyword){
-        connection.query('SELECT * from post WHERE Title LIKE "%' + keyword + '%" ORDER BY Post_Code DESC', function(err,result){
+        connection.query('SELECT * from post WHERE Title LIKE "%' + keyword + '%" ORDER BY Post_Code DESC LIMIT 4', function(err,result){
+            if(result.length == 0){//추가
+                return res.status(200).json({
+                    message:"검색된 글 없음",
+                })
+            }
             if(err){
                 console.log(err);
 
@@ -37,7 +42,15 @@ router.get('/',function(req,res) {
     }
     else{
 
-        connection.query("SELECT * from post ORDER BY Post_Code DESC",function(err,result){
+        connection.query("SELECT * from post ORDER BY Post_Code DESC limit 0,5",function(err,result){
+
+            if(result.length == 0){//추가
+                return res.status(200).json({
+                    message:"글 없음",
+                    result,
+                })
+            }
+
             if(err){
                 console.log(err);
     

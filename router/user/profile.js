@@ -24,6 +24,14 @@ router.get("/profile",function(req,res){
                 message:"server error",
             })
         }
+
+        if(!result){//추가
+            return res.status(200).json({
+                message:"게시글이 없습니다",
+                result,
+                i,
+            })
+        }
         else{
             console.log(result);
 

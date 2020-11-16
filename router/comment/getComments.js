@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-router.get('/getComments/C',function(req,res){
+router.get('/getComments',function(req,res){
     //const Post_Code = req.params.Post_Code;
     connection.query('SELECT * from comment ORDER BY Comment_Code DESC',function(err,result){
         if(err){
