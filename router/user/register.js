@@ -21,6 +21,19 @@ router.post("/register",function(req,res){
     var nick = body.nick;
 
     connection.query(`INSERT INTO member(E_mail,password,name,nick_name) VALUES(?, ?, ?, ?)`, [email, pw, name, nick], function(err,result){
+        
+        let engNum =  /^[a-zA-Z0-9]*$/;
+        let test = engNum.test(pw);
+        
+        if(!test){
+            console.log("비밀번호 형식이 틀립니다.");
+            return res.status(402).json({
+                message:"비밀번호 형식이 틀립니다."
+            })
+        }
+        console.log(test)
+        
+        
         if(pw=="" || name==""){추가
             console.log("공백 존재");
             return res.status(403).json({
